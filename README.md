@@ -55,33 +55,7 @@ A_real ^ key = (A ^ key) ^ key = A
 This works because of a basic XOR property:
 (X ^ K) ^ K = X for any bitstring X and key K.
 
-✅ Why is 1101 the Correct Key?
-Because the testbench was written assuming A and B are the original values. So to make the circuit act like a normal adder, you must use the same key that was originally used to lock the circuit logic.
-
-In our case, the design uses the XOR logic:
-
-verilog
-Copy
-Edit
-assign A_locked = A ^ key;
-So for the adder to function as expected, we need to reverse this XOR internally using the same key, which the testbench sets to:
-
-verilog
-Copy
-Edit
-key = 4'b1101;
-When you use this key:
-
-A_locked = A ^ 1101
-
-Internally, adder computes: (A ^ 1101) + (B ^ 1101)
-
-Since both inputs are XORed with the same key, the final output behaves just like:
-
-A + B
-
-✔️ Correct output.
-Any other key results in wrong input values and a wrong sum.
+✅ Question: What is the Correct Key?
 
 🚨 What Happens with the Wrong Key?
 Let’s say:
@@ -120,46 +94,3 @@ Key Used	A + B Output	Behavior
 1101	Correct sum	✅ Expected behavior
 Anything else	Incorrect sum	❌ Locked / Obfuscated
 Let me know if you'd like this explanation turned into a slide for your workshop, or included in the PDF instructions!
-
-
-
-
-
-
-
-You said:
-Now generate a multi-step kind of a lab that start with a simple example and gets more complicated. it should showcase, functional testing, logic locking, and hardwa trojan
-ChatGPT said:
-Your multi-stage semiconductor security lab document is ready! It includes three progressive hands-on stages: functional testing, logic locking, and hardware Trojan detection, plus reflection questions and extension ideas.
-
-📄 Download Multi_Stage_Semiconductor_Security_Lab.docx
-
-Would you like me to also create:
-
-Sample Verilog code for each stage?
-
-A slide version of this lab to guide participants during the workshop? ​​
-
-do both of these Sample Verilog code for each stage?
-
-A slide version of this lab to guide participants during the workshop?
-
-
-
-
-
-
-📄 Download Semiconductor_Security_Lab_Verilog_Samples.txt
-
-Let me know if you'd like these packaged into a zip file, or converted into separate files for EDA Playground! ​​
-
-
-📄 Download Semiconductor_Security_Lab_Verilog_Samples_REGEN.txt
-
-It includes:
-
-✅ Functional 4-bit Adder
-
-🔐 Logic-Locked Adder with Key Input
-
-🐞 Trojan-Embedded Adder (triggered by specific input)
