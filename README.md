@@ -1,10 +1,22 @@
-Lab1: Logic Locking
+##Lab1: Logic Locking
+
+This hands-on experiment demonstrates a simple logic locking mechanism at the gate level. In this case, a 4-bit adder is locked such that it only works correctly if the right key is supplied.
+
+## 🎯 Objective
+
+By "locking" the inputs of a digital design using a secret key, designers can protect their chip from:
+- Unauthorized use
+- Overproduction by foundries
+- Reverse engineering and IP theft
+
+
+## 🔍 Step-by-Step Instructions
 
 1. Go to https://edaplayground.com
 
-2. Paste locked_adder.v into the left-hand code window
+2. Paste Logic_Locking_Design.v into the left-hand code window
 
-3. Paste the testbench code into the right-hand testbench window
+3. Paste the Logic_Locking_Testbench.v code into the right-hand testbench window
 
 4. Choose:
   - Language: Verilog 2001
@@ -12,14 +24,12 @@ Lab1: Logic Locking
 
 5. Click Run
 
+6. Try to find the correct key.
+  
+8. ✅ Question: What is the Correct Key?
 
-Purpose of the Experiment
-This hands-on experiment demonstrates a simple logic locking mechanism at the gate level. By "locking" the inputs of a digital design using a secret key, designers can protect their chip from:
-- Unauthorized use
-- Overproduction by foundries
-- Reverse engineering and IP theft
 
-In this case, a 4-bit adder is locked such that it only works correctly if the right key is supplied.
+
 
 🧠 How Logic Locking Works Here
 🔐 The Locking Logic
@@ -48,14 +58,6 @@ B_real = B ^ key
 
 So to undo the XOR, you must XOR again with the same key:
 
-nginx
-Copy
-Edit
-A_real ^ key = (A ^ key) ^ key = A
-This works because of a basic XOR property:
-(X ^ K) ^ K = X for any bitstring X and key K.
-
-✅ Question: What is the Correct Key?
 
 🚨 What Happens with the Wrong Key?
 Let’s say:
@@ -89,31 +91,83 @@ With wrong keys, the XOR scrambling produces inconsistent results
 
 The chip will fail in unpredictable ways, rendering it unusable
 
-🧪 Summary
-Key Used	A + B Output	Behavior
-1101	Correct sum	✅ Expected behavior
-Anything else	Incorrect sum	❌ Locked / Obfuscated
-Let me know if you'd like this explanation turned into a slide for your workshop, or included in the PDF instructions!
 
-EDA Playground Hands-On Lab: Detecting a Stealthy Hardware Trojan
-In this lab, you'll explore how a stealthy hardware Trojan can be inserted into a simple circuit and remain dormant under normal conditions. You'll use EDA Playground to simulate a 4-bit adder that has been compromised with a Trojan triggered by a very specific input pattern.
-Objective
+#Lab2: Detecting a Stealthy Hardware Trojan
+
+This lab guides students through identifying a stealthy **hardware Trojan** embedded in a simple 4-bit adder. The Trojan remains dormant during normal operations and activates only under a specific trigger condition.
+
+---
+
+## 🎯 Objective
+
 Understand how a stealthy hardware Trojan operates and how it can be detected through strategic functional testing.
-Tools Required
-• EDA Playground (https://edaplayground.com)
-• Web browser and internet access
-Step-by-Step Instructions
-Step 1: Understand the Design
-The circuit is a 4-bit adder. A Trojan has been inserted to produce an incorrect sum only when both inputs are exactly 4'b1010 (decimal 10).
-Step 2: Open EDA Playground and Load the Design
-Paste the Verilog design and testbench code (provided separately) into EDA Playground. Use Verilog 2001 and Icarus Verilog simulator.
-Step 3: Run the Testbench
-Simulate the design and observe the output values. The design should behave like a normal adder for all cases except when A and B are both 10.
-Step 4: Analyze the Trojan Behavior
-Look for the anomaly when A and B are 10. This is the only case where the sum is intentionally wrong. This demonstrates how hardware Trojans can stay hidden unless specifically triggered.
-Step 5: Reflect and Discuss
-• How easy is it to miss a Trojan during standard testing?
-• What methods could detect such stealthy triggers?
-• How can hardware design be hardened against such threats?
-![image](https://github.com/user-attachments/assets/4bd2998b-0385-4443-aeea-9d77f9b281f2)
 
+---
+
+## 🛠 Tools Required
+
+- Web browser
+- Internet access
+- [EDA Playground](https://edaplayground.com) (Free, no login required)
+
+---
+
+## 🧰 Files
+
+- `Hardware_Trojan_Design.v`: 4-bit adder with embedded Trojan
+- `Hardware_Trojan_Testbench.v`: Testbench to simulate and expose the Trojan
+
+---
+
+## 🔍 Step-by-Step Instructions
+
+### 1. Understand the Design
+
+The module performs a 4-bit addition. However, a **Trojan is triggered only when both `A` and `B` are `4'b1010` (decimal 10)**, which alters the expected output.
+
+---
+
+### 2. Open EDA Playground
+
+1. Go to [EDA Playground](https://edaplayground.com)
+2. Select **Verilog 2001** as the language
+3. Choose **Icarus Verilog** as the simulator
+4. Paste the contents of `Hardware_Trojan_Design.v` in the left window
+5. Paste `Hardware_Trojan_Testbench.v` in the right testbench window
+
+---
+
+### 3. Run the Simulation
+
+Click the **Run** button to simulate. Observe the output:
+
+```plaintext
+A    B    => SUM
+3 + 2 = 5
+5 + 7 = 12
+8 + 1 = 9
+```
+---
+
+### 4. Experiment
+
+- Analyze the design and try different inputs to activate the Trojan
+- How the Trojan get activated?
+- What does the Trojan do?
+  
+---
+
+### 5. Reflect and Discuss
+
+- How easy is it to miss a Trojan during standard functional testing?
+- How might designers harden circuits against such threats?
+
+---
+
+## 📎 Extensions
+
+- Modify the Trojan condition to activate under a different pattern
+- Insert additional logging or alarms when the Trojan is triggered
+- Explore formal verification tools to detect logic anomalies
+
+Happy hacking! 🔐
