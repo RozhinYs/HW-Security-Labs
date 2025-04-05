@@ -94,3 +94,26 @@ Key Used	A + B Output	Behavior
 1101	Correct sum	✅ Expected behavior
 Anything else	Incorrect sum	❌ Locked / Obfuscated
 Let me know if you'd like this explanation turned into a slide for your workshop, or included in the PDF instructions!
+
+EDA Playground Hands-On Lab: Detecting a Stealthy Hardware Trojan
+In this lab, you'll explore how a stealthy hardware Trojan can be inserted into a simple circuit and remain dormant under normal conditions. You'll use EDA Playground to simulate a 4-bit adder that has been compromised with a Trojan triggered by a very specific input pattern.
+Objective
+Understand how a stealthy hardware Trojan operates and how it can be detected through strategic functional testing.
+Tools Required
+• EDA Playground (https://edaplayground.com)
+• Web browser and internet access
+Step-by-Step Instructions
+Step 1: Understand the Design
+The circuit is a 4-bit adder. A Trojan has been inserted to produce an incorrect sum only when both inputs are exactly 4'b1010 (decimal 10).
+Step 2: Open EDA Playground and Load the Design
+Paste the Verilog design and testbench code (provided separately) into EDA Playground. Use Verilog 2001 and Icarus Verilog simulator.
+Step 3: Run the Testbench
+Simulate the design and observe the output values. The design should behave like a normal adder for all cases except when A and B are both 10.
+Step 4: Analyze the Trojan Behavior
+Look for the anomaly when A and B are 10. This is the only case where the sum is intentionally wrong. This demonstrates how hardware Trojans can stay hidden unless specifically triggered.
+Step 5: Reflect and Discuss
+• How easy is it to miss a Trojan during standard testing?
+• What methods could detect such stealthy triggers?
+• How can hardware design be hardened against such threats?
+![image](https://github.com/user-attachments/assets/4bd2998b-0385-4443-aeea-9d77f9b281f2)
+
