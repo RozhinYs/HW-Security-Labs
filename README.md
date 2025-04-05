@@ -1,4 +1,4 @@
-##Lab1: Logic Locking
+## Lab1: Logic Locking
 
 This hands-on experiment demonstrates a simple logic locking mechanism at the gate level. In this case, a 4-bit adder is locked such that it only works correctly if the right key is supplied.
 
@@ -9,6 +9,7 @@ By "locking" the inputs of a digital design using a secret key, designers can pr
 - Overproduction by foundries
 - Reverse engineering and IP theft
 
+---
 
 ## 🔍 Step-by-Step Instructions
 
@@ -28,8 +29,7 @@ By "locking" the inputs of a digital design using a secret key, designers can pr
   
 8. ✅ Question: What is the Correct Key?
 
-
-
+---
 
 🧠 How Logic Locking Works Here
 🔐 The Locking Logic
@@ -56,7 +56,9 @@ A_real = A ^ key
 
 B_real = B ^ key
 
-So to undo the XOR, you must XOR again with the same key:
+So to undo the XOR, you must XOR again with the same key!
+
+---
 
 
 🚨 What Happens with the Wrong Key?
@@ -91,12 +93,11 @@ With wrong keys, the XOR scrambling produces inconsistent results
 
 The chip will fail in unpredictable ways, rendering it unusable
 
+---
 
-#Lab2: Detecting a Stealthy Hardware Trojan
+## Lab2: Detecting a Stealthy Hardware Trojan
 
 This lab guides students through identifying a stealthy **hardware Trojan** embedded in a simple 4-bit adder. The Trojan remains dormant during normal operations and activates only under a specific trigger condition.
-
----
 
 ## 🎯 Objective
 
